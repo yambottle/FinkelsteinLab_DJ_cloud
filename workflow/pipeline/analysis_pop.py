@@ -91,10 +91,10 @@ class ROISVDPython(dj.Computed):
         num_components_save = 100
 
         rel_data1 = (img.ROIdeltaF & key) - img.ROIBad
-        self2 = pop.SVDSingularValuesPython
-        self3 = pop.SVDTemporalComponentsPython
+        self2 = SVDSingularValuesPython
+        self3 = SVDTemporalComponentsPython
         for i, time_bin in enumerate(time_bin_vector):
-            compute_SVD(self, self2, self3, key, rel_data1, flag_zscore, time_bin, thresholds_for_event, threshold_variance_explained, num_components_save)
+            self.compute_SVD(self, self2, self3, key, rel_data1, flag_zscore, time_bin, thresholds_for_event, threshold_variance_explained, num_components_save)
 
     def compute_SVD(self, self2, self3, key, rel_data1, flag_zscore, time_bin, thresholds_for_event, threshold_variance_explained, num_components_save):
         key['time_bin'] = time_bin
@@ -141,9 +141,9 @@ class ROISVDPython(dj.Computed):
             InsertChunked(self, key_ROIs, 1000)
 
             # Populating POP.SVDSingularValuesPython
-            key_singular_values = key;
-            key_singular_values['singular_values'] = s;
-            sefl2.insert(key_singular_values);
+            key_singular_values = key
+            key_singular_values['singular_values'] = s
+            self2.insert(key_singular_values)
             
             # Populating POP.SVDTemporalComponentsPython
             key_temporal = [key for _ in range(num_components_save)]
