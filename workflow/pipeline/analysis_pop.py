@@ -5,6 +5,7 @@ import numpy as np
 import scipy
 # import os.path
 from bisect import bisect
+import math
 from math import *
 
 schema = dj.Schema('arseny_analysis_pop')
