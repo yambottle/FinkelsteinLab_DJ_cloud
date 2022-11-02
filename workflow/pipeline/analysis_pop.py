@@ -143,14 +143,14 @@ class ROISVDPython(dj.Computed):
             # Populating POP.SVDSingularValuesPython
             key_singular_values = key
             key_singular_values['singular_values'] = s
-            self2.insert(key_singular_values)
+            self2.insert(key_singular_values, allow_direct_insert=True)
             
             # Populating POP.SVDTemporalComponentsPython
             key_temporal = [key for _ in range(num_components_save)]
             for ic in range(num_components_save):
                 key_temporal[ic]['component_id'] = i
                 key_temporal[ic]['temporal_component'] = vt[ic]
-            self3.insert(key_temporal)
+            self3.insert(key_temporal, allow_direct_insert=True)
 
 
 @schema
