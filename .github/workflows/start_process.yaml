@@ -9,7 +9,6 @@ jobs:
               uses: actions/checkout@v3
             - name: check your permission
               run: |
-                  ls -al
                   if grep -Fxq "$GITHUB_ACTOR" ./.github/workflows/start_process_allow_list
                   then
                       echo "INFO::Passed"
