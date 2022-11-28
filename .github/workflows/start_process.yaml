@@ -36,6 +36,8 @@ jobs:
               run: |
                   echo "INFO::start worker instance"
                   aws ec2 start-instances --instance-ids ${INSTANCE_ID}
+                  export INSTANCE_STATUS=unknown
+                  sleep 60
             - name: start process
               run: |
                   echo "INFO::start process"
