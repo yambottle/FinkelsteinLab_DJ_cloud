@@ -3,4 +3,15 @@ on:
     workflow_dispatch:
 jobs:
     call_context_check:
+        if: contains('["yambottle","ttngu207"]', github.actor)
         uses: dj-sciops/djsciops-cicd/.github/workflows/context_check.yaml@main
+    start_process:
+        needs: call_context_check
+        runs-on: ubuntu-latest
+        steps:
+            - name: start worker instance
+              run: |
+                  echo "INFO::start worker instance"
+            - name: start process
+              run: |
+                  echo "INFO::start process"
