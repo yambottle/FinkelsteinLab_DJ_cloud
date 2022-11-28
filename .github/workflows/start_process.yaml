@@ -9,7 +9,7 @@ jobs:
               if: contains('["ttngu207"]', github.actor)
               run: echo "INFO::Passed"
             - name: you don't have permission
-              if: ! contains('["ttngu207"]', github.actor)
+              if: contains('["ttngu207"]', github.actor)==false
               run: |
                   echo "ERROR::Please your repo owner or admin to add your github username to the action secrets"
                   exit 1
