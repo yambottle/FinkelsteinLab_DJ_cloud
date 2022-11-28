@@ -44,4 +44,4 @@ jobs:
                     --instance-os-user ubuntu \
                     --availability-zone us-east-1a \
                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
-                  ssh -i arseny_temp_ssh ubuntu@3.220.191.117 "bash /home/ubuntu/run.sh"
+                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@3.220.191.117 "bash /home/ubuntu/run.sh"
