@@ -38,3 +38,10 @@ jobs:
             - name: start process
               run: |
                   echo "INFO::start process"
+                  ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
+                  aws ec2-instance-connect send-ssh-public-key \
+                    --instance-id i-001f2f52b7f9a5a6c \
+                    --instance-os-user ubuntu \
+                    --availability-zone us-east-1a \
+                    --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
+                  ssh -i arseny_temp_ssh ubuntu@3.220.191.117 "bash /home/ubuntu/run.sh"
