@@ -6,15 +6,15 @@ jobs:
         runs-on: ubuntu-latest
         steps:
             - name: passed
-              if: contains('["ttngu207"]', github.actor)
+              if: contains('["yambottle","ttngu207"]', github.actor)
               run: echo "INFO::Passed"
             - name: you don't have permission
-              if: contains('["ttngu207"]', github.actor)==false
+              if: contains('["yambottle","ttngu207"]', github.actor)==false
               run: |
                   echo "ERROR::Please your repo owner or admin to add your github username to the action secrets"
                   exit 1
     call_context_check:
-        if: contains('["ttngu207"]', github.actor)
+        if: contains('["yambottle","ttngu207"]', github.actor)
         needs: check_your_permission
         uses: dj-sciops/djsciops-cicd/.github/workflows/context_check.yaml@main
     start_process:
