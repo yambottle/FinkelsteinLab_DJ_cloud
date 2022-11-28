@@ -10,12 +10,11 @@ jobs:
             - name: check your permission
               run: |
                   ls -al
-                  export ARE_YOU_ALLOWED=$(grep -Fxq "$GITHUB_ACTOR" ./.github/workflows/start_process_allow_list)
-                  if [ $ARE_YOU_ALLOWED ]
+                  if grep -Fxq "$GITHUB_ACTOR" ./.github/workflows/start_process_allow_list
                   then
                       echo "INFO::Passed"
                   else
-                      echo "ERROR::Please make a pull request to add your github username in the .github/workflows/start_process_allow_list"
+                      echo "ERROR::Please make a pull request to add your github username in '.github/workflows/start_process_allow_list'"
                       exit 1
                   fi
             # - name: passed
