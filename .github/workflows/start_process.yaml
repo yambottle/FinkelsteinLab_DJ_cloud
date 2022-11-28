@@ -34,7 +34,7 @@ jobs:
                   INSTANCE_ID: ${{ secrets.INSTANCE_ID }}
               run: |
                   echo "INFO::start worker instance"
-                  aws ec2 start-instances --instance-ids ${INSTNACE_ID}
+                  aws ec2 start-instances --instance-ids ${INSTANCE_ID}
             - name: start process
               run: |
                   echo "INFO::start process"
