@@ -2,8 +2,20 @@ name: start_process
 on:
     workflow_dispatch:
 jobs:
+    check_your_permission:
+        runs-on: ubuntu-latest
+        steps:
+            - name: passed
+              if: contains('["ttngu207"]', github.actor)
+              run: echo "INFO::Passed"
+            - name: you don't have permission
+              if: ! contains('["ttngu207"]', github.actor)
+              run: |
+                  echo "ERROR::Please your repo owner or admin to add your github username to the action secrets"
+                  exit 1
     call_context_check:
         if: contains('["ttngu207"]', github.actor)
+        needs: check_your_permission
         uses: dj-sciops/djsciops-cicd/.github/workflows/context_check.yaml@main
     start_process:
         needs: call_context_check
