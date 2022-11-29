@@ -15,7 +15,7 @@ with open(path.join(here, pkg_name, 'version.py')) as f:
     exec(f.read())
 
 setup(
-    name='',
+    name='finkelstein-lab',
     version=__version__,
     description="DataJoint data workflow for ArsenyFinkelsteinLab",
     long_description=long_description,
