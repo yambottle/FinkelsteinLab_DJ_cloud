@@ -4,10 +4,10 @@ ArsenyFinkelsteinLab DataJoint workflow - cloud deployment
 # Workflow operation
 
 This workflow is fully containerized using Docker and is currently setup for automatic deployment to AWS EC2 instance that is already provisioned. 
-The credentials to access this EC2 instance is set as GitHub secrets (see [GitHub Actions secrets](./github/workflows/start_process.README.md) for details)
+The credentials to access this EC2 instance is set as GitHub secrets (see [GitHub Actions secrets](./.github/workflows/start_process.README.md) for details)
 
-Once the required credentials are added, initialization of this workflow is done by manually trigger a predefined GitHub Actions named `start_process` (see code [here](./github/workflows/start_process.yaml))
-Your GitHub username needs to be specified in the [***allow-list***](./github/workflows/start_process_allow_list) for you to be able to trigger the GitHub Actions. If you are not in the list yet, make changes to the list and issue a PR for Arseny's approval. 
+Once the required credentials are added, initialization of this workflow is done by manually trigger a predefined GitHub Actions named `start_process` (see code [here](./.github/workflows/start_process.yaml))
+Your GitHub username needs to be specified in the [***allow-list***](./.github/workflows/start_process_allow_list) for you to be able to trigger the GitHub Actions. If you are not in the list yet, make changes to the list and issue a PR for Arseny's approval. 
 
 ### How to start a new round of workflow operation
 
