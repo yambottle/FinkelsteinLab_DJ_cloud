@@ -37,7 +37,7 @@ jobs:
               run: |
                   echo "INFO::start worker instance"
                   aws ec2 start-instances --instance-ids ${INSTANCE_ID}
-                  sleep 20
+                  sleep 90
             - name: start process
               run: |
                   echo "INFO::start process"

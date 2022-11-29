@@ -7,9 +7,6 @@ echo "Copy .env file"
 cp .FinkelsteinLab.env ArsenyLabWorkflow/docker/standard_worker/.env
 
 # build and start the container
-echo "Waiting for Docker to start..."
-sleep 60
-
 cd ArsenyLabWorkflow/docker/standard_worker/dist/debian
 
 echo "Build Docker image"
