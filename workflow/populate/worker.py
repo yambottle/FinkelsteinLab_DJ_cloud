@@ -17,7 +17,7 @@ autoclear_error_patterns = []
 standard_worker = DataJointWorker('standard_worker',
                                   worker_schema_name,
                                   db_prefix=[db_prefix],
-                                  run_duration=-1,
+                                  run_duration=1,
                                   sleep_duration=20,
                                   autoclear_error_patterns=autoclear_error_patterns)
 
