@@ -46,5 +46,5 @@ jobs:
                     --instance-os-user ubuntu \
                     --availability-zone us-east-1a \
                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
-                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "bash /home/ubuntu/test.sh" | true
+                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "bash /home/ubuntu/test.sh" || true
                   echo "INFO::instance stopped"
