@@ -148,7 +148,7 @@ class ROISVDPython(dj.Computed):
             # Populating POP.SVDTemporalComponentsPython
             key_temporal = [key for _ in range(num_components_save)]
             for ic in range(num_components_save):
-                key_temporal[ic]['component_id'] = i
+                key_temporal[ic]['component_id'] = ic
                 key_temporal[ic]['temporal_component'] = vt[ic]
             self3.insert(key_temporal, allow_direct_insert=True)
 
