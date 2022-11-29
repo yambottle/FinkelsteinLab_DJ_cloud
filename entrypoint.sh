@@ -1,12 +1,15 @@
 #!/bin/bash
-echo 5
-sleep 5
-echo 4
-sleep 4
-echo 3
-sleep 3
-echo 2
-sleep 2
-echo 1
-sleep 1
+
+cd ~
+
+# copy in the .env file - this file is manually created and placed in this EC2 instance
+cp .FinkelsteinLab.env ArsenyLabWorkflow/docker/standard_worker/.env
+
+# build and start the container
+cd ArsenyLabWorkflow/docker/standard_worker/dist/debian
+
+docker compose --env-file=../../.env  -f docker-compose-standard_worker.yaml build --no-cache
+docker compose --env-file=../../.env  -f docker-compose-standard_worker.yaml up
+
+# stop the EC2 instance
 sudo shutdown now
