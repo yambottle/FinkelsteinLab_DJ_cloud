@@ -109,12 +109,12 @@ class ROISVDPython(dj.Computed):
         # TODO: Use unique_roi_number or something esle to guarantee consistent order
         # (but unique_roi_number is not a primary key)
 
-        if 'dff_trace' in (rel_data1 & key).describe(printout=False):
+        if 'dff_trace' in rel_data1.heading.secondary_attributes:
             F = FetchChunked(rel_data1 & key, 'roi_number', 'dff_trace', 500)
         else:
             F = FetchChunked(rel_data1 & key, 'roi_number', 'spikes_trace', 500)
 
-        F_binned = np.array([MakeBins(Fi, time_bin * imaging_frame_rate) for Fi in F])
+        F_binned = np.array([MakeBins(Fi.flatten(), time_bin * imaging_frame_rate) for Fi in F])
 
         for threshold in thresholds_for_event:
             key['threshold_for_event'] = threshold
