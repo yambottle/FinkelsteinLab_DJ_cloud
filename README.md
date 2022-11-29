@@ -11,9 +11,9 @@ Your GitHub username needs to be specified in the [***allow-list***](./.github/w
 
 ### How to start a new round of workflow operation
 
-Step 1 - From any browser, navigate to the GitHub [repository for this workflow](https://github.com/ArsenyFinkelsteinLab/DJ_cloud) - make sure to log in to your GitHub account
-Step 2 - Click on the ***Actions*** tab, in which you will see the list of available "GitHub workflows" on the left pannel. There is only one for this repo, named `start_process`
-Step 3 - Click on the GitHub workflow `start_process`, then on right side, from the dropdown menu "Run Workflow", click the green button "Run Workflow" to trigger one round of operation
+1. From any browser, navigate to the GitHub [repository for this workflow](https://github.com/ArsenyFinkelsteinLab/DJ_cloud) - make sure to log in to your GitHub account
+2. Click on the ***Actions*** tab, in which you will see the list of available "GitHub workflows" on the left pannel. There is only one for this repo, named `start_process`
+3. Click on the GitHub workflow `start_process`, then on right side, from the dropdown menu "Run Workflow", click the green button "Run Workflow" to trigger one round of operation
 
 ### What is the expected behavior?
 Once a new round of operation is triggered with the GitHub Actions above, the pre-provisioned EC2 instance will start, and then the following steps are performed
