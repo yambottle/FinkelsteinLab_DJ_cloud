@@ -21,5 +21,5 @@ echo "----- Cleanup Docker -----"
 docker compose --env-file=../../.env  -f docker-compose-standard_worker.yaml down
 docker system prune -a -f --volumes
 
-echo "----- Stop the EC2 instance -----"
-sudo shutdown now
+# echo "----- Stop the EC2 instance -----"
+# sudo shutdown now
