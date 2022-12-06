@@ -141,13 +141,11 @@ class ROISVDPython(dj.Computed):
             InsertChunked(self, key_ROIs, 1000)
 
             # Populating POP.SVDSingularValuesPython
-            key_singular_values = key.copy()
-            key_singular_values['singular_values'] = s
-            self2.insert1(key_singular_values, allow_direct_insert=True)
+            self2.insert1({**key, 'singular_values': s}, allow_direct_insert=True)
             
             # Populating POP.SVDTemporalComponentsPython
             key_temporal = [{**key, 'component_id': ic, 'temporal_component': vt[ic]}
-                    for ic in range(num_components_save)]
+                            for ic in range(num_components_save)]
             self3.insert(key_temporal, allow_direct_insert=True)
 
 
