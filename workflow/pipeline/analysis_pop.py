@@ -97,11 +97,9 @@ class ROISVDPython(dj.Computed):
             self.compute_SVD(self2, self3, key, rel_data1, flag_zscore, time_bin, thresholds_for_event, threshold_variance_explained, num_components_save)
 
     def compute_SVD(self, self2, self3, key, rel_data1, flag_zscore, time_bin, thresholds_for_event, threshold_variance_explained, num_components_save):
-        key['time_bin'] = time_bin
-
         rel_FOVEpoch = img.FOVEpoch & key
         rel_FOV = img.FOV & key
-        if 'imaging_frame_rate' in rel_FOVEpoch.describe(printout=False):
+        if 'imaging_frame_rate' in rel_FOVEpoch.heading.secondary_attributes:
             imaging_frame_rate = rel_FOVEpoch.fetch1('imaging_frame_rate')
         else:
             imaging_frame_rate = rel_FOV.fetch1('imaging_frame_rate')
@@ -117,8 +115,6 @@ class ROISVDPython(dj.Computed):
         F_binned = np.array([MakeBins(Fi.flatten(), time_bin * imaging_frame_rate) for Fi in F])
 
         for threshold in thresholds_for_event:
-            key['threshold_for_event'] = threshold
-
             F_normalized = NormalizeF(F_binned, threshold, flag_zscore)
 
             u, s, vh = np.linalg.svd(F_normalized, full_matrices=False)
@@ -140,11 +136,10 @@ class ROISVDPython(dj.Computed):
 
             InsertChunked(self, key_ROIs, 1000)
 
-            # Populating POP.SVDSingularValuesPython
-            self2.insert1({**key, 'singular_values': s}, allow_direct_insert=True)
-            
-            # Populating POP.SVDTemporalComponentsPython
-            key_temporal = [{**key, 'component_id': ic, 'temporal_component': vt[ic]}
+            # Populating POP.SVDSingularValuesPython and POP.SVDTemporalComponentsPython
+            svd_key = {**key, 'time_bin': time_bin, 'threshold_for_event': threshold}
+            self2.insert1({**svd_key, 'singular_values': s}, allow_direct_insert=True)
+            key_temporal = [{**svd_key, 'component_id': ic, 'temporal_component': vt[ic]}
                             for ic in range(num_components_save)]
             self3.insert(key_temporal, allow_direct_insert=True)
 
