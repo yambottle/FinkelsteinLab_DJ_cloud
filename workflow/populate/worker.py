@@ -22,6 +22,6 @@ standard_worker = DataJointWorker('standard_worker',
                                   autoclear_error_patterns=autoclear_error_patterns)
 
 # restrict to 1 session
-analysis_pop.ROISVDPython.key_source &= {'subject_id': '464724', 'session': 2}
+analysis_pop.ROISVDPython.key_source &= {'subject_id': '464724', 'session': 3}
 
 standard_worker(analysis_pop.ROISVDPython)
