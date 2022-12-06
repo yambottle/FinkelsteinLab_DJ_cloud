@@ -48,7 +48,7 @@ jobs:
                     --availability-zone us-east-1a \
                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
                   ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo rm -rf /home/ubuntu/ArsenyLabWorkflow;git clone https://github.com/${GITHUB_REPOSITORY}.git /home/ubuntu/ArsenyLabWorkflow;bash /home/ubuntu/ArsenyLabWorkflow/entrypoint.sh" || true
-                  # echo "INFO::instance stopped"
+                  rm -f ./arseny_temp_ssh*
                   echo "INFO::process finished"
             - name: stop worker instance
               run: |
@@ -60,3 +60,5 @@ jobs:
                     --availability-zone us-east-1a \
                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
                   ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo shutdown now" || true
+                  rm -f ./arseny_temp_ssh*
+                  echo "INFO::instance stopped"
