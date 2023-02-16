@@ -38,19 +38,7 @@ jobs:
                   echo "INFO::start worker instance"
                   aws ec2 start-instances --instance-ids ${INSTANCE_ID}
                   sleep 90
-            - name: start process
-              run: |
-                  echo "INFO::start process"
-                  ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
-                  aws ec2-instance-connect send-ssh-public-key \
-                    --instance-id ${INSTANCE_ID} \
-                    --instance-os-user ubuntu \
-                    --availability-zone us-east-1a \
-                    --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
-                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo rm -rf /home/ubuntu/ArsenyLabWorkflow;git clone https://github.com/${GITHUB_REPOSITORY}.git /home/ubuntu/ArsenyLabWorkflow;bash /home/ubuntu/ArsenyLabWorkflow/entrypoint.sh" || true
-                  rm -f ./arseny_temp_ssh*
-                  echo "INFO::process finished"
-#             - name: test process
+#             - name: start process
 #               run: |
 #                   echo "INFO::start process"
 #                   ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
@@ -59,18 +47,30 @@ jobs:
 #                     --instance-os-user ubuntu \
 #                     --availability-zone us-east-1a \
 #                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
-#                   ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "while true; do date; sleep 60; done;" || true
+#                   ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo rm -rf /home/ubuntu/ArsenyLabWorkflow;git clone https://github.com/${GITHUB_REPOSITORY}.git /home/ubuntu/ArsenyLabWorkflow;bash /home/ubuntu/ArsenyLabWorkflow/entrypoint.sh" || true
 #                   rm -f ./arseny_temp_ssh*
 #                   echo "INFO::process finished"
-#             - name: stop worker instance
-#               run: |
-#                   echo "INFO::stop worker instance"
-#                   ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
-#                   aws ec2-instance-connect send-ssh-public-key \
-#                     --instance-id ${INSTANCE_ID} \
-#                     --instance-os-user ubuntu \
-#                     --availability-zone us-east-1a \
-#                     --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
-#                   ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo shutdown now" || true
-#                   rm -f ./arseny_temp_ssh*
-#                   echo "INFO::instance stopped"
+            - name: test process
+              run: |
+                  echo "INFO::start process"
+                  ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
+                  aws ec2-instance-connect send-ssh-public-key \
+                    --instance-id ${INSTANCE_ID} \
+                    --instance-os-user ubuntu \
+                    --availability-zone us-east-1a \
+                    --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
+                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "date;" || true
+                  rm -f ./arseny_temp_ssh*
+                  echo "INFO::process finished"
+            - name: stop worker instance
+              run: |
+                  echo "INFO::stop worker instance"
+                  ssh-keygen -t rsa -b 2048 -C arseny -f ./arseny_temp_ssh -q -N ""
+                  aws ec2-instance-connect send-ssh-public-key \
+                    --instance-id ${INSTANCE_ID} \
+                    --instance-os-user ubuntu \
+                    --availability-zone us-east-1a \
+                    --ssh-public-key file://${PWD}/arseny_temp_ssh.pub
+                  ssh -o "StrictHostKeyChecking no" -i arseny_temp_ssh ubuntu@${INSTANCE_IP} "sudo shutdown now" || true
+                  rm -f ./arseny_temp_ssh*
+                  echo "INFO::instance stopped"
